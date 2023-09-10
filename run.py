@@ -1,20 +1,16 @@
-import panda as pd
 import gspread
-from google.oauth2.service_account import Credentials
+from oauth2client.service_account import ServiceAccountCredentials
 
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+scope = ['https://spreadsheets.google.com/feeds', 
+         'https://www.googleapis.com/auth/drive']
 
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('Library_Books')
+credentials = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
+client = gspread.authorize(credentials)
 
-booklist= SHEET.worksheet('booklist')
+sheet = client.open("library_books")
 
-data = booklist.get_all_list()
+title = sheet.worksheet("list")
+
+data = title.get_all_values()
 
 print(data)
