@@ -9,15 +9,9 @@ client = gspread.authorize(credentials)
 
 sheet = client.open("library_books")
 
-"""
-children= sheet.worksheet("children")
-
-data = children.get_all_values()
-
-print(data)
-"""
 
 
+"""Add new Book Details"""
 
 def add_new_book(Title, Author,  EntryDate):
     return f"{Title}, {Author}, {EntryDate}"
@@ -35,6 +29,9 @@ Call the function with user input
 new_book = add_new_book(Title, Author,  EntryDate)
 print(new_book)
 
+
+"""To update google sheet"""
+
 def update_nonfiction_worksheet(data):
     """
     update nonfiction worksheet add new row with the list data provided.
@@ -50,11 +47,23 @@ print(new_book)
 update_nonfiction_worksheet(new_book)
 
 
+"""search book from google sheet."""
 
+nonfiction = sheet.worksheet("nonfiction")
+all_values = nonfiction.get_all_values()  # Corrected function call
 
+book_name = input(f"Enter book name:")
 
+found_books = []
 
+# Loop through the rows to search for the book
+for row in all_values:
+    if book_name.lower() in row[0].lower():
+        found_books.append(row[0])
 
-
-
-
+if found_books:
+    print(f"Books containing '{book_name}':") 
+    for book in found_books:
+        print(book)
+else:
+    print(f"No books containing '{book_name}' found.")
