@@ -1,46 +1,59 @@
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
 
-scope = ['https://spreadsheets.google.com/feeds', 
-         'https://www.googleapis.com/auth/drive']
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
 
-credentials = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
-client = gspread.authorize(credentials)
-
-sheet = client.open("library_books")
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('library_books')
 
 """Add new Book Details"""
+
 def add_new_book():
+    title = input("Enter book Title: ")
+    author = input("Enter Author's name: ")
+    category = input("Enter category: ")
+    entry_date = input("Enter EntryDate: ")
 
-    Title = input("Enter book Title: ")
-    Author = input("Enter Author,s name:")
-    EntryDate = input("Enter EntryDate:")
+    # Construct a dictionary to hold the book information
+    book_data = {
+        'Title': title,
+        'Author': author,
+        'Category': category,
+        'EntryDate': entry_date
+    }
 
-    return f"Title, Author, EntryDate"
-    
-
-new_book = add_new_book()
-print(new_book)
-
-
-"""Updating googlesheet"""
+    return book_data
 
 def update_list_worksheet(data):
-    print("updating list worksheet...\n")
-    list_worksheet = sheet.worksheet("list")
-    
-    print("list worksheet  updated succesfully.\n")
+    print("Updating list worksheet...\n")
 
-data = add_new_book()   
+    headers = ['Title', 'Author', 'Category', 'EntryDate']
+
+    list_worksheet = SHEET.worksheet("list")
+    list_worksheet.append_row([data[header] for header in headers])
+    
+
+    
+
+   
+
+    print("List worksheet updated successfully.\n")
+
+
 new_book = add_new_book()
 update_list_worksheet(new_book)
 
 
 
-
 """search book from google sheet."""
 
-list = sheet.worksheet("list")
+list = SHEET.worksheet("list")
 all_values = list.get_all_values()
 
 book_name = input(f"Enter book name:")
