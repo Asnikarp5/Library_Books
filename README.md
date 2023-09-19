@@ -1,32 +1,14 @@
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-Welcome,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+#Library_Books
 
-## Reminders
+### DESCRIPTON
+The Library Book Management System project aims to modernize and optimize library operations, making it a valuable tool for libraries of all sizes. It will contribute to the efficient organization of books and enhance the overall library experience for both librarians and other users.
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+### FLOW CHART
 
-## Creating the Heroku app
+url[https://lucid.app/lucidchart/800e262f-5351-4ebb-adba-c365d4a9a26b/edit?viewport_loc=6%2C-49%2C1707%2C759%2C0_0&invitationId=inv_1797eba5-4a42-4673-bf0c-e42b841aa8c5]
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+### SCREENSHOTS
 
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
