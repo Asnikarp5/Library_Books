@@ -11,4 +11,3 @@ The Library Book Management System project aims to modernize and optimize librar
 url[https://lucid.app/lucidchart/800e262f-5351-4ebb-adba-c365d4a9a26b/edit?viewport_loc=6%2C-49%2C1707%2C759%2C0_0&invitationId=inv_1797eba5-4a42-4673-bf0c-e42b841aa8c5]
 
 ### SCREENSHOTS
-
