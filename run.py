@@ -37,19 +37,11 @@ def update_list_worksheet(data):
 
     list_worksheet = SHEET.worksheet("list")
     list_worksheet.append_row([data[header] for header in headers])
-    
-
-    
-
-   
-
     print("List worksheet updated successfully.\n")
 
 
 new_book = add_new_book()
 update_list_worksheet(new_book)
-
-
 
 """search book from google sheet."""
 
@@ -70,3 +62,19 @@ if found_books:
         print(book)
 else:
     print(f"No books containing '{book_name}' found.")
+
+""" Delete Book details """
+def delete_book_details(title):
+
+    try:
+        list = SHEET.worksheet("list")
+        cell = list.find(title)
+        list.delete_rows(cell.row)
+        print(f"Deleted the row containaing '{title}'")
+    except SHEET.worksheet:
+        print(f"Book with title '{title}' not found in the list")
+
+
+book_title_to_delete = input(f"Enter the book title to delete: ")
+delete_book_details(book_title_to_delete)            
+
